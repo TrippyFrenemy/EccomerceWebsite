@@ -4,3 +4,5 @@ db.sqllite3
 *.log
 *.pot
 *.pyc
+static
+media

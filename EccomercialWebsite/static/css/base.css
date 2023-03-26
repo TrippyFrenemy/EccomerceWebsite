@@ -1,5 +1,5 @@
 body {
-    background: #f8f8f8
+    background: #f8f8f8;
 }
 
 .product_title {
@@ -20,8 +20,11 @@ body {
     letter-spacing: .2em;
 }
 
-footer{
-    position: fixed;
+.footer {
+    position: absolute;
     bottom: 0;
     width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    height: 80px;
 }

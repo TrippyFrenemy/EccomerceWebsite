@@ -22,5 +22,12 @@ def about(request):
     return render(request, "about.html")
 
 
-def product(request):
-    return render(request, "product.html")
+def product(request, category_slug=None, product_slug=None):
+    try:
+        product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+    except Exception as e:
+        raise e
+    dict={
+        "product": product
+    }
+    return render(request, "product.html", dict)

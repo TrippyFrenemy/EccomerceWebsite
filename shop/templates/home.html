@@ -24,9 +24,7 @@
                             <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" width="300" height="200">
                         </div>
                         <div class="card-footer d-flex justify-content-between" style="background: transparent; border-color: transparent;">
-                            <p class="font-weight-bold mb-0">
-                                {{ product.name }}
-                            </p>
+                            <a href="{{ product.get_url }}"><p class="font-weight-bold mb-0">{{ product.name }}</p></a>
                             <h5 class="text-info font-italic mb-0">
                                 ${{ product.price }}
                             </h5>

@@ -6,3 +6,4 @@ db.sqllite3
 *.pyc
 static/admin
 media
+variant

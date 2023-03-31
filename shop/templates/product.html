@@ -16,9 +16,9 @@
             <p class="product_desc">Product Description</p>
             <p class="text-justify product_text">{{ product.description }}</p>
             {% if product.stock <= 0 %}
-            <p class="text-justify product_text">Out of stock</p>
+                <p class="text-justify product_text">Out of stock</p>
             {% else %}
-                <a href="">Add to cart</a>
+                <a href=""><i class="material-icons">shopping_cart</i></a>
             {% endif %}
         </div>
     </div>

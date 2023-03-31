@@ -31,3 +31,7 @@ def product(request, category_slug=None, product_slug=None):
         "product": product
     }
     return render(request, "product.html", dict)
+
+
+def cart(request):
+    return render(request, "cart.html")

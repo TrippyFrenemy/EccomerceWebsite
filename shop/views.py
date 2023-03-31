@@ -68,9 +68,8 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
             counter += item.quantity
     except ObjectDoesNotExist:
         pass
-    dict = dict(
+    return render(request, "cart.html", dict(
         cart_items=cart_items,
         total=total,
         counter=counter
-    )
-    return render(request, "cart.html", dict)
+    ))

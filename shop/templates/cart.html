@@ -55,10 +55,9 @@
                         <td>
                             {% if item.quantity < item.product.stock %}
                                 <a href="{% url "add_cart" item.product.id %}"><i class="material-icons cart-icon">add</i></a>
-
                             {% endif %}
-                            <a href=""><i class="material-icons cart-icon">remove</i></a>
-                            <a href=""><i class="material-icons cart-icon">delete</i></a>
+                            <a href="{% url "cart_remove" item.product.id %}"><i class="material-icons cart-icon">remove</i></a>
+                            <a href="{% url "cart_delete" item.product.id %}"><i class="material-icons cart-icon">delete</i></a>
                         </td>
                     </tr>
                 {% endfor %}

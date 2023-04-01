@@ -49,8 +49,9 @@ def add_cart(request, product_id):
         cart = Cart.objects.create(cart_id=_cart_id(request))
         cart.save()
     try:
-        cart_item = CartItem.objects.get(product= product, cart= cart)
-        cart_item.quantity += 1
+        cart_item = CartItem.objects.get(product=product, cart=cart)
+        if cart_item.quantity < cart_item.product.stock:
+            cart_item.quantity += 1
         cart_item.save()
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(product= product, cart= cart, quantity=1)
@@ -68,7 +69,8 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
             counter += item.quantity
     except ObjectDoesNotExist:
         pass
-    return render(request, "cart.html", dict(
+    return render(request, "cart.html",
+    dict(
         cart_items=cart_items,
         total=total,
         counter=counter

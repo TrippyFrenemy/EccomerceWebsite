@@ -21,7 +21,7 @@
                 <div class="col-9 mx-auto col-md-6 col-lg-3">
                     <div class="card mb-4">
                         <div class="p-4">
-                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" width="300" height="200">
+                            <a href="{{ product.get_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" width="300" height="200"></a>
                         </div>
                         <div class="card-footer d-flex justify-content-between" style="background: transparent; border-color: transparent;">
                             <a href="{{ product.get_url }}"><p class="font-weight-bold mb-0">{{ product.name }}</p></a>

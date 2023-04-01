@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 <!--Home page with url home-->
 {% block content %}
 
@@ -14,9 +15,9 @@
                 <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
                     <br>
                     <p>Please input following information to create a new account</p>
-                    <form action="post">
+                    <form method="post">
                         {% csrf_token %}
-                        <p>{{ form }}</p>
+                        <p>{{ form | crispy}}</p>
                         <button type="submit" name="button" class="btn btn-secondary">SignUp</button>
                     </form>
                 </div>
@@ -29,7 +30,7 @@
                 </h1>
                 <br>
                 <div>
-                    <p>Your account has been created and ready to use</p>
+                    <p class="text-center">Your account has been created and ready to use</p>
                 </div>
             </div>
         {% endif %}

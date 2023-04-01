@@ -28,3 +28,8 @@ body {
     line-height: 60px;
     height: 80px;
 }
+
+.errorlist li {
+    color: red;
+    font-weight: bold;
+}

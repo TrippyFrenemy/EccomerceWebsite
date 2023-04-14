@@ -1,8 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Product, Cart, CartItem
+from .models import Category, Product, Cart, CartItem, Order
 from django.contrib.auth.models import Group, User
-from .forms import SignUpForm
+from .forms import SignUpForm, OrderForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -77,7 +77,8 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
     dict(
         cart_items=cart_items,
         total=total,
-        counter=counter
+        counter=counter,
+        cart=cart
     ))
 
 
@@ -99,6 +100,27 @@ def cart_delete(request, product_id):
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
     return redirect("cart_detail")
+
+
+def order(request, total=0, counter=0):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart_items = CartItem.objects.filter(cart=cart, active=True)
+            order = Order.objects.filter(**form.cleaned_data)
+            for item in cart_items:
+                total += (item.product.price * item.quantity)
+                counter += item.quantity
+                item.product.stock -= item.quantity
+                item.product.save()
+            cart.delete()
+            order.cart = cart
+            order.total = total
+            return redirect("home")
+    else:
+        form = OrderForm()
+    return render(request, "order.html", dict(form=form))
 
 
 def sign_up(request):
@@ -133,3 +155,11 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+def view_orders(request):
+
+    return render(request, "view_orders.html", )
+
+
+

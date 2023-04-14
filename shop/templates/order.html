@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!--Home page with url home-->
+
+{% block content %}
+    <div>
+        <br>
+        <h1 class="product_title text-center">
+            Order
+        </h1>
+        <br>
+        <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+            <br>
+            <p>Please input following information to help us with order</p>
+            <form method="post">
+                {% csrf_token %}
+                <p>{{ form | crispy}}</p>
+                <button type="submit" name="button" class="btn btn-secondary">Take Order</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

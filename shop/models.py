@@ -69,4 +69,18 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
 
     def __str__(self):
-        return self.product
+        return self.product.name
+
+
+class Order(models.Model):
+    full_name = models.CharField(max_length=100)
+    telephone = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    date_added = models.DateField(auto_now_add=True)
+    class Meta:
+        ordering = ["date_added"]
+        db_table = "Order"
+        verbose_name = "order"
+        verbose_name_plural = "orders"

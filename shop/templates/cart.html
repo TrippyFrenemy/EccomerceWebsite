@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 <!--About page with url about-->
-<%{% block content %}
-
-
-
+{% block content %}
     {% if not cart_items %}
     <div class="text-center">
         <br>
@@ -91,7 +88,11 @@
                         Back To Products
                     </button>
                 </a>
-
+                <a href="{% url "order" %}">
+                    <button type="button" class="btn btn-lg btn-block text-white" style="background-color: #444345">
+                        Order
+                    </button>
+                </a>
             </div>
         </div>
     </div>

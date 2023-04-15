@@ -72,15 +72,15 @@ class CartItem(models.Model):
         return self.product.name
 
 
-class Order(models.Model):
+class Orders(models.Model):
     full_name = models.CharField(max_length=100)
     telephone = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+    total = models.DecimalField(max_digits=10, decimal_places=2,)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     date_added = models.DateField(auto_now_add=True)
     class Meta:
         ordering = ["date_added"]
-        db_table = "Order"
+        db_table = "Orders"
         verbose_name = "order"
         verbose_name_plural = "orders"

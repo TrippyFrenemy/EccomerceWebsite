@@ -28,7 +28,9 @@
                             <h5 class="text-info font-italic mb-0">
                                 ${{ product.price }}
                             </h5>
-                            <a href="{% url "add_cart" product.id %}"><i class="material-icons">shopping_cart</i></a>
+                            {% if product.stock > 0 %}
+                                <a href="{% url "add_cart" product.id %}"><i class="material-icons">shopping_cart</i></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

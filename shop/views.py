@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Product, Cart, CartItem, Order
+from .models import Category, Product, Cart, CartItem, Orders
 from django.contrib.auth.models import Group, User
 from .forms import SignUpForm, OrderForm
 from django.contrib.auth import login, authenticate, logout
@@ -108,15 +108,12 @@ def order(request, total=0, counter=0):
         if form.is_valid():
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, active=True)
-            order = Order.objects.filter(**form.cleaned_data)
             for item in cart_items:
                 total += (item.product.price * item.quantity)
                 counter += item.quantity
                 item.product.stock -= item.quantity
                 item.product.save()
-            cart.delete()
-            order.cart = cart
-            order.total = total
+            Orders.objects.create(**form.cleaned_data, total=total, cart=cart)
             return redirect("home")
     else:
         form = OrderForm()
@@ -155,11 +152,3 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
-
-
-def view_orders(request):
-
-    return render(request, "view_orders.html", )
-
-
-

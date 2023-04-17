@@ -58,7 +58,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField()
     active = models.BooleanField(default=True)
 
@@ -77,7 +77,7 @@ class Orders(models.Model):
     telephone = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     total = models.DecimalField(max_digits=10, decimal_places=2,)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart_items = models.TextField(default="")
     date_added = models.DateField(auto_now_add=True)
     class Meta:
         ordering = ["date_added"]

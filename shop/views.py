@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Cart, CartItem, Orders
 from django.contrib.auth.models import Group, User
@@ -106,14 +107,22 @@ def order(request, total=0, counter=0):
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
-            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart = get_object_or_404(Cart, cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, active=True)
+            order = Orders.objects.create(**form.cleaned_data, total=total)
             for item in cart_items:
-                total += (item.product.price * item.quantity)
-                counter += item.quantity
-                item.product.stock -= item.quantity
-                item.product.save()
-            Orders.objects.create(**form.cleaned_data, total=total, cart=cart)
+                if item.product.stock >= item.quantity:
+                    total += (item.product.price * item.quantity)
+                    counter += item.quantity
+                    item.product.stock -= item.quantity
+                    item.active = False
+                    item.product.save()
+                    order.cart_items += str([(item.product.name + ' ') for i in range(0, item.quantity)])
+                else:
+                    return HttpResponse("No in stock")
+            order.total = total
+            order.save()
+            cart.delete()
             return redirect("home")
     else:
         form = OrderForm()

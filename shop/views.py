@@ -1,3 +1,4 @@
+import random
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -13,7 +14,7 @@ def home(request, category_slug=None):
     category_page = None
     products = None
     if category_slug != None:
-        category_page = get_object_or_404(Category, slug= category_slug)
+        category_page = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category_page, available=True)
     else:
         products = Product.objects.all().filter(available=True)
@@ -161,3 +162,41 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def check_login():
+    try:
+        x = random.randint(1,5)
+        a = 1 / x
+    except ZeroDivisionError:
+        pass
+    return True
+
+
+def check_user():
+    return True if 2-2==0 else False
+
+
+def check_order():
+    order = Orders.objects.all()
+    if order != None:
+        return True
+    return True
+
+
+def check_cart():
+    pass

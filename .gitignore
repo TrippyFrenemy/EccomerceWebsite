@@ -7,3 +7,5 @@ db.sqllite3
 static/admin
 media
 variant
+venv
+workflows

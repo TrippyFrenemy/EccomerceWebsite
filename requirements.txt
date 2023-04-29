@@ -3,3 +3,5 @@ pillow==9.2.0
 psycopg2==2.9.5
 django-crispy-forms==2.0
 crispy_bootstrap5==0.7
+pytest==7.1.2
+pytest-django==4.5.2

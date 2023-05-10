@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-o=l)c5p=fi!ljcygnclm07!xp1dhontp61ieyyg+mimq8vl&@f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -80,14 +80,24 @@ WSGI_APPLICATION = "EccomercialWebsite.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "eccomercedb",
+#         "USER": "postgres",
+#         "PASSWORD": "1234",
+#         "HOST": "localhost",
+#         "PORT": "5432"
+#     }
+# }
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "eccomercedb",
-        "USER": "postgres",
-        "PASSWORD": "1234",
-        "HOST": "localhost",
-        "PORT": "5432"
+    'default': {
+        'ENGINE': os.environ.get('DB_DRIVER', 'django.db.backends.postgresql'),
+        'NAME': os.environ.get('PG_DB', 'd7bh0jlm1nc7hs'),
+        'USER': os.environ.get('PG_USER', 'bvrjlvdniipilz'),
+        'PASSWORD': os.environ.get('PG_PASSWORD', '3c0d45270439bc9328cb2e010f290397f271fe4f263f26e5ea2d01f39ce6277f'),
+        'HOST': os.environ.get('PG_HOST', 'ec2-99-80-190-165.eu-west-1.compute.amazonaws.com'),
+        'PORT': os.environ.get('PG_PORT', '5432'),
     }
 }
 

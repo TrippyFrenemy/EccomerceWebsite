@@ -8,3 +8,11 @@ static/admin
 media
 variant
 venv
+
+
+
+
+.dockerignore
+django.sh
+docker-compose.yml
+Dockerfile

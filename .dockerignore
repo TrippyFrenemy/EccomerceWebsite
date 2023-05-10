@@ -1,0 +1,7 @@
+venv
+.idea
+__pycache__
+db.sqllite3
+*.log
+*.pot
+*.pyc

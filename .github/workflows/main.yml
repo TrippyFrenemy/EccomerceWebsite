@@ -6,7 +6,6 @@ on:
 
 jobs:
   init:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,12 +24,3 @@ jobs:
       - name: Test with pytest
         run: python -m pytest -s -v test_build_and_run/
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.13 # This is the action
-        with:
-          heroku_api_key:  "3dfddb35-289b-41f0-961e-0b7e153a7fe6"
-          heroku_app_name: "test-shop-cicd" #Must be unique in Heroku
-          heroku_email: "trippyfren@gmail.com"
